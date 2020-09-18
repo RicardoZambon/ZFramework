@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ZFramework.Data.Db.Interfaces
+namespace ZFramework.Data.Abstract.Interfaces
 {
     public interface IQuery<TEntity> where TEntity : class
     {

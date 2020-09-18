@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ZFramework.Data.Db.EfCore
+namespace ZFramework.Data.EfCore
 {
     public class ZDbContext : DbContext
     {

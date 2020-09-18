@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>ZFramework.Data.Db</AssemblyName>
-    <RootNamespace>ZFramework.Data.Db</RootNamespace>
+    <AssemblyName>ZFramework.Data.EfCore</AssemblyName>
+    <RootNamespace>ZFramework.Data.EfCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
