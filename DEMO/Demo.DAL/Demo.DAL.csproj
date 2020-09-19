@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ZFramework.Demo.DAL</AssemblyName>
+    <RootNamespace>ZFramework.Demo.DAL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\API\Data.Abstract\Data.Abstract.csproj" />
+    <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
+    <ProjectReference Include="..\Database.EF\Data.EfCore.csproj" />
+  </ItemGroup>
+
+</Project>

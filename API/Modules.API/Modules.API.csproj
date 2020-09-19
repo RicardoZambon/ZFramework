@@ -6,5 +6,9 @@
     <RootNamespace>ZFramework.Modules.API</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Abstract\Data.Abstract.csproj" />
+  </ItemGroup>
+
 
 </Project>
