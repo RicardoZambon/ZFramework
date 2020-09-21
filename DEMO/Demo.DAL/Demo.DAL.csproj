@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\API\Data.Abstract\Data.Abstract.csproj" />
     <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
-    <ProjectReference Include="..\Database.EF\Data.EfCore.csproj" />
   </ItemGroup>
 
 </Project>
