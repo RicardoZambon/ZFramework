@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
