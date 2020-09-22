@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DEMO\Demo.DAL\Demo.DAL.csproj" />
+    <ProjectReference Include="..\..\API\Data.Abstract\Data.Abstract.csproj" />
+    <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
+    <ProjectReference Include="..\..\API\Modules.API\Modules.API.csproj" />
+    <ProjectReference Include="..\Demo.DAL\Demo.DAL.csproj" />
   </ItemGroup>
-
 
 </Project>

@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Abstract", "API\Data.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.DAL", "DEMO\Demo.DAL\Demo.DAL.csproj", "{C9134BC9-9B8F-42E0-9AA1-6905E59C3B8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.API", "Demo.API\Demo.API.csproj", "{B43A6140-E7F6-4DA3-89EA-D21A89E93614}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.API", "DEMO\Demo.API\Demo.API.csproj", "{B43A6140-E7F6-4DA3-89EA-D21A89E93614}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
