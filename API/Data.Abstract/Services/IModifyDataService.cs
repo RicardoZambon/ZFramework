@@ -2,7 +2,7 @@
 
 namespace ZFramework.Data.Abstract.Services
 {
-    public interface IModifyService<TEntity> where TEntity : class, IEntity
+    public interface IModifyDataService<TEntity> where TEntity : class, IEntity
     {
         void SaveChanges(TEntity entity);
     }

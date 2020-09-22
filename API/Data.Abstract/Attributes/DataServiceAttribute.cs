@@ -2,11 +2,11 @@
 
 namespace ZFramework.Data.Abstract.Attributes
 {
-    public class ServiceAttribute : Attribute
+    public class DataServiceAttribute : Attribute
     {
         public Type ServiceType { get; }
 
-        public ServiceAttribute(Type serviceType)
+        public DataServiceAttribute(Type serviceType)
         {
             ServiceType = serviceType;
         }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ZFramework.Data.Abstract.ExtensionMethods;
 using ZFramework.Data.EfCore.ExtensionMethods;
 using ZFramework.Demo.DAL;
 
@@ -23,6 +24,8 @@ namespace Demo.API
             services.AddControllers();
 
             services.AddFrameworkEfCoreDatabase<DemoDbContext>(Configuration.GetConnectionString("DefaultConnection"));
+
+            services.AddRepositoryServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

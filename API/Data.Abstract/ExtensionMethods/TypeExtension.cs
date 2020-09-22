@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -18,13 +19,10 @@ namespace ZFramework.Data.Abstract.ExtensionMethods
         public static bool ImplementsInterface(this Type type, Type interfaceType)
             => type.GetTypeInfo().ImplementedInterfaces.Contains(interfaceType);
 
-        //public static void GetReferencedAssemblies<TType>()
-        //    => GetReferencedAssemblies(typeof(TType));
-
-        //public static IEnumerable<string> GetReferencedAssemblies(this Type interfaceType)
-        //    => AppDomain.CurrentDomain.GetAssemblies()
-        //        .Where(a => a.DefinedTypes.Any(x => !x.IsAbstract && !x.IsGenericTypeDefinition && x.GetTypeInfo().ImplementedInterfaces.Contains(interfaceType)))
-        //        .Select(a => a.GetName().Name)
-        //        .Distinct();
+        public static IEnumerable<TypeInfo> GetReferencedTypes<TAttribute>() where TAttribute : Attribute
+            => AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.DefinedTypes)
+                .Where(x => !x.IsAbstract && !x.IsGenericTypeDefinition && x.GetCustomAttribute<TAttribute>() != null)
+                .Distinct();
     }
 }

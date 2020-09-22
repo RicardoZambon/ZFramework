@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Mongo\" />
-  </ItemGroup>
-
 </Project>

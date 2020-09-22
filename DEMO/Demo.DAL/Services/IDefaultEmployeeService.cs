@@ -3,7 +3,7 @@ using ZFramework.Demo.DAL.BusinessData;
 
 namespace ZFramework.Demo.DAL.Services
 {
-    public interface IDefaultEmployeeService : IDefaultService<Employees>
+    public interface IDefaultEmployeeService : IDefaultDataService<Employees>
     {
     }
 }

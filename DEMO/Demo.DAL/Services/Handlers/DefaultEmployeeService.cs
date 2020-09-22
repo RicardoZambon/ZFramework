@@ -5,7 +5,7 @@ using ZFramework.Demo.DAL.Repositories;
 
 namespace ZFramework.Demo.DAL.Services.Handlers
 {
-    [Service(typeof(IDefaultEmployeeService))]
+    [DataService(typeof(IDefaultEmployeeService))]
     public class DefaultEmployeeService : IDefaultEmployeeService
     {
         private readonly IEmployeeRepository employeeRepository;
