@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using ZFramework.Data.Abstract.Attributes;
 using ZFramework.Demo.DAL.BusinessData;
-using ZFramework.Demo.DAL.Repositories.EfCore;
+using ZFramework.Demo.DAL.Repositories;
 
 namespace ZFramework.Demo.DAL.Services.Handlers
 {
     [Service(typeof(IDefaultEmployeeService))]
     public class DefaultEmployeeService : IDefaultEmployeeService
     {
-        private readonly EmployeeRepository employeeRepository;
+        private readonly IEmployeeRepository employeeRepository;
 
-        public DefaultEmployeeService(EmployeeRepository employeeRepository)
+        public DefaultEmployeeService(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
         }
