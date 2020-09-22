@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Reflection;
 using ZFramework.Data.EfCore.ExtensionMethods;
 
 namespace ZFramework.Data.EfCore
@@ -11,15 +12,16 @@ namespace ZFramework.Data.EfCore
 
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             var options = this.GetService<IDbContextOptions>();
+            var migrationsAssembly = Assembly.Load(RelationalOptionsExtension.Extract(options).MigrationsAssembly);
 
-            modelBuilder.CreateEntitiesModel(options);
-            //CreateQueriesModel
+            modelBuilder.CreateEntitiesModel(migrationsAssembly);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(migrationsAssembly);
         }
     }
 }
