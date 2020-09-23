@@ -35,7 +35,7 @@ namespace ZFramework.Data.EfCore.ExtensionMethods
             services.AddEntityFrameworkSqlServer();
             services.AddEntityFrameworkProxies();
 
-            services.AddDbContextPool<TDBContext>((serviceProvider, optionsBuilder) =>
+            services.AddDbContextPool<ZDbContext, TDBContext>((serviceProvider, optionsBuilder) =>
             {
                 optionsBuilder.UseLazyLoadingProxies().UseSqlServer(
                     connectionString,
