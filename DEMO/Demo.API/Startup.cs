@@ -9,7 +9,7 @@ using System.Text;
 using ZFramework.Data.Abstract.ExtensionMethods;
 using ZFramework.Data.EfCore.ExtensionMethods;
 using ZFramework.Demo.DAL;
-using ZFramework.Modules.API;
+using ZFramework.Modules.API.ExtensionMethods;
 
 namespace Demo.API
 {
@@ -28,12 +28,13 @@ namespace Demo.API
             services.AddCors();
             services.AddControllers();
 
-            services.AddFrameworkEfCoreDatabase<DemoDbContext>(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddFrameworkEfCoreSqlServerDatabase<DemoDbContext>(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddRepositoryServices();
 
-            var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            services.AddAuthentication(x =>
+            var apiSecrets = Configuration[$"Settings:{nameof(ZFramework.Modules.API.Services.TokenOptions.ApiSecrets)}"];
+            services.AddTokenService(s => s.ApiSecrets = apiSecrets)
+            .AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,7 +46,7 @@ namespace Demo.API
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(apiSecrets)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -74,7 +75,7 @@ namespace Demo.API
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "api/{controller}/{action}/{id?}");
             });
         }
     }

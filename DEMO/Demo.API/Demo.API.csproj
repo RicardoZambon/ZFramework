@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ZFramework.Demo.API</AssemblyName>
     <RootNamespace>ZFramework.Demo.API</RootNamespace>
+    <UserSecretsId>7780c2c1-0f4f-4cd2-8320-7c79c001d022</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
@@ -17,12 +17,10 @@
       <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\API\Data.Abstract\Data.Abstract.csproj" />
     <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
     <ProjectReference Include="..\..\API\Modules.API\Modules.API.csproj" />
     <ProjectReference Include="..\Demo.DAL\Demo.DAL.csproj" />
   </ItemGroup>
-
 </Project>

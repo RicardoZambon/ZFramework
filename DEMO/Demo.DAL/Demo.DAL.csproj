@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\API\Data.Abstract\Data.Abstract.csproj" />
     <ProjectReference Include="..\..\API\Data.EfCore\Data.EfCore.csproj" />
+    <ProjectReference Include="..\..\API\Modules.API\Modules.API.csproj" />
   </ItemGroup>
 
 </Project>

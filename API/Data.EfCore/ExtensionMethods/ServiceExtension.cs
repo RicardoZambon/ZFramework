@@ -10,27 +10,27 @@ namespace ZFramework.Data.EfCore.ExtensionMethods
         private const string DefaultMigrationSchema = "EF";
 
 
-        public static void AddFrameworkEfCoreDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString) where TDBContext : ZDbContext
+        public static void AddFrameworkEfCoreSqlServerDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString) where TDBContext : ZDbContext
         {
-            services.AddFrameworkEfCoreDatabase<TDBContext>(connectionString, typeof(TDBContext).Assembly.GetName().Name, DefaultMigrationTableName, DefaultMigrationSchema);
+            services.AddFrameworkEfCoreSqlServerDatabase<TDBContext>(connectionString, typeof(TDBContext).Assembly.GetName().Name, DefaultMigrationTableName, DefaultMigrationSchema);
         }
 
-        public static void AddFrameworkEfCoreDatabase(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName)
+        public static void AddFrameworkEfCoreSqlServerDatabase(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName)
         {
-            services.AddFrameworkEfCoreDatabase<ZDbContext>(connectionString, migrationsAssemblyName, DefaultMigrationTableName, DefaultMigrationSchema);
+            services.AddFrameworkEfCoreSqlServerDatabase<ZDbContext>(connectionString, migrationsAssemblyName, DefaultMigrationTableName, DefaultMigrationSchema);
         }
 
-        public static void AddFrameworkEfCoreDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString, string migrationsTableName, string migrationsSchema) where TDBContext : ZDbContext
+        public static void AddFrameworkEfCoreSqlServerDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString, string migrationsTableName, string migrationsSchema) where TDBContext : ZDbContext
         {
-            services.AddFrameworkEfCoreDatabase<TDBContext>(connectionString, typeof(TDBContext).GetType().Assembly.GetName().Name, migrationsTableName, migrationsSchema);
+            services.AddFrameworkEfCoreSqlServerDatabase<TDBContext>(connectionString, typeof(TDBContext).GetType().Assembly.GetName().Name, migrationsTableName, migrationsSchema);
         }
 
-        public static void AddFrameworkEfCoreDatabase(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName, string migrationsTableName, string migrationsSchema)
+        public static void AddFrameworkEfCoreSqlServerDatabase(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName, string migrationsTableName, string migrationsSchema)
         {
-            services.AddFrameworkEfCoreDatabase<ZDbContext>(connectionString, migrationsAssemblyName, migrationsTableName, migrationsSchema);
+            services.AddFrameworkEfCoreSqlServerDatabase<ZDbContext>(connectionString, migrationsAssemblyName, migrationsTableName, migrationsSchema);
         }
 
-        private static void AddFrameworkEfCoreDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName, string migrationsTableName, string migrationsSchema) where TDBContext : ZDbContext
+        private static void AddFrameworkEfCoreSqlServerDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName, string migrationsTableName, string migrationsSchema) where TDBContext : ZDbContext
         {
             services.AddEntityFrameworkSqlServer();
             services.AddEntityFrameworkProxies();
@@ -42,6 +42,44 @@ namespace ZFramework.Data.EfCore.ExtensionMethods
                     b =>
                         b.MigrationsAssembly(migrationsAssemblyName)
                         .MigrationsHistoryTable(migrationsTableName, migrationsSchema)
+                );
+                optionsBuilder.UseInternalServiceProvider(serviceProvider);
+            });
+        }
+
+
+        public static void AddFrameworkEfCoreSqliteDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString) where TDBContext : ZDbContext
+        {
+            services.AddFrameworkEfCoreSqliteDatabase<TDBContext>(connectionString, typeof(TDBContext).Assembly.GetName().Name, DefaultMigrationTableName);
+        }
+
+        public static void AddFrameworkEfCoreSqliteDatabase(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName)
+        {
+            services.AddFrameworkEfCoreSqliteDatabase<ZDbContext>(connectionString, migrationsAssemblyName, DefaultMigrationTableName);
+        }
+
+        public static void AddFrameworkEfCoreSqliteDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString, string migrationsTableName) where TDBContext : ZDbContext
+        {
+            services.AddFrameworkEfCoreSqliteDatabase<TDBContext>(connectionString, typeof(TDBContext).GetType().Assembly.GetName().Name, migrationsTableName);
+        }
+
+        public static void AddFrameworkEfCoreSqliteDatabase(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName, string migrationsTableName)
+        {
+            services.AddFrameworkEfCoreSqliteDatabase<ZDbContext>(connectionString, migrationsAssemblyName, migrationsTableName);
+        }
+
+        private static void AddFrameworkEfCoreSqliteDatabase<TDBContext>(this IServiceCollection services, [NotNull] string connectionString, string migrationsAssemblyName, string migrationsTableName) where TDBContext : ZDbContext
+        {
+            services.AddEntityFrameworkSqlite();
+            services.AddEntityFrameworkProxies();
+
+            services.AddDbContextPool<ZDbContext, TDBContext>((serviceProvider, optionsBuilder) =>
+            {
+                optionsBuilder.UseLazyLoadingProxies().UseSqlite(
+                    connectionString,
+                    b =>
+                        b.MigrationsAssembly(migrationsAssemblyName)
+                        .MigrationsHistoryTable(migrationsTableName)
                 );
                 optionsBuilder.UseInternalServiceProvider(serviceProvider);
             });

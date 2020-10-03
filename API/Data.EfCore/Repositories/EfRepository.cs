@@ -6,11 +6,11 @@ namespace ZFramework.Data.EfCore.Repositories
 {
     public abstract class EfRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        private readonly ZDbContext DbContext;
+        protected readonly ZDbContext DbContext;
 
         protected EfRepository(ZDbContext dbContext)
         {
-            this.DbContext = dbContext;
+            DbContext = dbContext;
         }
 
 
