@@ -1,6 +1,6 @@
 ﻿namespace ZFramework.Modules.API.Interfaces
 {
-    public interface IUser
+    public interface IUserAccount
     {
         string Username { get; set; }
 

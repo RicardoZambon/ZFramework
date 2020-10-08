@@ -31,6 +31,7 @@ namespace Demo.API
             services.AddFrameworkEfCoreSqlServerDatabase<DemoDbContext>(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddRepositoryServices();
+            services.AddDataServices();
 
             var apiSecrets = Configuration[$"Settings:{nameof(ZFramework.Modules.API.Services.TokenOptions.ApiSecrets)}"];
             services.AddTokenService(s => s.ApiSecrets = apiSecrets)

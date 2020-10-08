@@ -1,33 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using ZFramework.Data.Abstract.Interfaces;
-using ZFramework.Modules.API.Interfaces;
 using ZFramework.Modules.API.Models;
-using ZFramework.Modules.API.Repositories;
 using ZFramework.Modules.API.Services;
 
 namespace ZFramework.Modules.API.Controllers
 {
-    public abstract class AccountControllerBase<TRepository, TUser, TLoginModel> : ControllerBase where TRepository : class, IUserRepository<TUser> where TUser : class, IEntity, IUser where TLoginModel : LoginModel
+    public abstract class AccountControllerBase<TAccountService, TLoginModel> : ControllerBase where TAccountService : class, IAccountService where TLoginModel : LoginModel
     {
-        private readonly TRepository UserRepository;
-        private readonly ITokenService TokenService;
+        private readonly TAccountService AccountService;
 
-        public AccountControllerBase(TRepository userRepository, ITokenService tokenService)
+        public AccountControllerBase(TAccountService accountService)
         {
-            UserRepository = userRepository;
-            TokenService = tokenService;
+            AccountService = accountService;
         }
 
 
-        protected async Task<ActionResult<dynamic>> Authenticate([FromBody] LoginModel model)
+        [HttpPost, Route(nameof(Authenticate))]
+        public async Task<ActionResult<dynamic>> Authenticate([FromBody] TLoginModel model)
         {
-            if (UserRepository.Authenticate(model.Username, model.Password))
+            if (AccountService.AuthenticateAndGenerateToken(model, out var token))
             {
-                var token = TokenService.GenerateToken(model.Username);
                 return new { model.Username, token };
             }
             return Unauthorized();
+        }
+    }
+
+    public abstract class AccountControllerBase<TLoginModel> : AccountControllerBase<IAccountService, TLoginModel> where TLoginModel : LoginModel
+    {
+        protected AccountControllerBase(IAccountService accountService) : base(accountService)
+        {
+        }
+    }
+
+    public abstract class AccountControllerBase : AccountControllerBase<LoginModel>
+    {
+        protected AccountControllerBase(IAccountService accountService) : base(accountService)
+        {
         }
     }
 }
