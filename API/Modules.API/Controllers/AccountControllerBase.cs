@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ZFramework.Modules.API.Models;
 using ZFramework.Modules.API.Services;
 
@@ -15,8 +15,8 @@ namespace ZFramework.Modules.API.Controllers
         }
 
 
-        [HttpPost, Route(nameof(Authenticate))]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] TLoginModel model)
+        [HttpPost, Route(nameof(Authenticate)), AllowAnonymous]
+        public ActionResult<dynamic> Authenticate([FromBody] TLoginModel model)
         {
             if (AccountService.AuthenticateAndGenerateToken(model, out var token))
             {

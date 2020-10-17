@@ -1,9 +1,7 @@
-﻿using ZFramework.Data.Abstract.Interfaces;
-
-namespace ZFramework.Data.Abstract.Services
+﻿namespace ZFramework.Data.Abstract.Services
 {
-    public interface IModifyDataService<TEntity> where TEntity : class, IEntity
+    public interface IModifyDataService<TEditModel> where TEditModel : class
     {
-        void SaveChanges(TEntity entity);
+        void SaveChanges(TEditModel entity);
     }
 }

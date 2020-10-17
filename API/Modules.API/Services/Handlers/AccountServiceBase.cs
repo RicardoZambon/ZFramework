@@ -1,4 +1,5 @@
-﻿using ZFramework.Data.Abstract.Interfaces;
+﻿using System.Threading.Tasks;
+using ZFramework.Data.Abstract.Interfaces;
 using ZFramework.Modules.API.Interfaces;
 using ZFramework.Modules.API.Models;
 using ZFramework.Modules.API.Repositories;
@@ -18,7 +19,7 @@ namespace ZFramework.Modules.API.Services.Handlers
 
         public virtual bool AuthenticateAndGenerateToken(LoginModel model, out string token)
         {
-            if (UserRepository.Authenticate(model.Username, model.Password))
+            if (UserRepository.AuthenticateAsync(model.Username, model.Password).Result)
             {
                 token = TokenService.GenerateToken(model.Username);
                 return true;

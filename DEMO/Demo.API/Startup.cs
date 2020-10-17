@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.Net.Security;
 using System.Text;
 using ZFramework.Data.Abstract.ExtensionMethods;
 using ZFramework.Data.EfCore.ExtensionMethods;
@@ -72,7 +73,7 @@ namespace Demo.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireAuthorization();
 
                 endpoints.MapControllerRoute(
                     name: "default",

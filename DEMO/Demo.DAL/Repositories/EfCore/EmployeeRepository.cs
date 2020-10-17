@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using ZFramework.Data.Abstract.Attributes;
 using ZFramework.Data.EfCore;
 using ZFramework.Data.EfCore.Repositories;
@@ -13,7 +15,7 @@ namespace ZFramework.Demo.DAL.Repositories.EfCore
         {
         }
 
-        public bool Authenticate(string username, string password)
-            => DbContext.Set<Employees>().Any(x => x.IsActive && x.Username == username && x.PasswordHash == password);
+        public async Task<bool> AuthenticateAsync(string username, string password)
+            => await DbContext.Set<Employees>().AnyAsync(x => x.IsActive && x.Username == username && x.PasswordHash == password);
     }
 }

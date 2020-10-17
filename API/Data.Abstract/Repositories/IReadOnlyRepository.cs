@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using ZFramework.Data.Abstract.Interfaces;
 
 namespace ZFramework.Data.Abstract.Repositories

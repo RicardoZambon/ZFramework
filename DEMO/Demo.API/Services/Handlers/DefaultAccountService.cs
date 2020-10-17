@@ -4,7 +4,7 @@ using ZFramework.Demo.DAL.Repositories;
 using ZFramework.Modules.API.Services;
 using ZFramework.Modules.API.Services.Handlers;
 
-namespace ZFramework.Demo.DAL.Services.Handlers
+namespace ZFramework.Demo.API.Services.Handlers
 {
     [DataService(typeof(IAccountService))]
     public class DefaultAccountService : AccountServiceBase<IEmployeeRepository, Employees>
