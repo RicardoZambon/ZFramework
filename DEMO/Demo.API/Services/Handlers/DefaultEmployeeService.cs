@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using ZFramework.Data.Abstract.Attributes;
 using ZFramework.Demo.API.Models;
-using ZFramework.Demo.DAL.BusinessData;
 using ZFramework.Demo.DAL.Repositories;
 
 namespace ZFramework.Demo.API.Services.Handlers

@@ -5,7 +5,7 @@ namespace ZFramework.Demo.DAL.BusinessData
 {
     public class Employees : UserBase
     {
-        [StringLength(200)]
+        [StringLength(200), Required]
         public string FullName { get; set; }
     }
 }

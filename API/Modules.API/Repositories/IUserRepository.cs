@@ -7,6 +7,8 @@ namespace ZFramework.Modules.API.Repositories
 {
     public interface IUserRepository<TUser> : IRepository<TUser> where TUser : class, IEntity, IUserAccount
     {
-        Task<bool> AuthenticateAsync(string username, string password);
+        Task<bool> AuthenticateAsync(long userId, string passwordHash);
+
+        Task<TUser> FindByUsernameAsync(string username);
     }
 }

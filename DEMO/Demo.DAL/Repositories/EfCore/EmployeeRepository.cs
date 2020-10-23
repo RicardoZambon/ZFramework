@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 using ZFramework.Data.Abstract.Attributes;
 using ZFramework.Data.EfCore;
@@ -15,7 +14,11 @@ namespace ZFramework.Demo.DAL.Repositories.EfCore
         {
         }
 
-        public async Task<bool> AuthenticateAsync(string username, string password)
-            => await DbContext.Set<Employees>().AnyAsync(x => x.IsActive && x.Username == username && x.PasswordHash == password);
+
+        public async Task<bool> AuthenticateAsync(long userId, string passwordHash)
+            => await DbContext.Set<Employees>().AnyAsync(x => x.ID == userId && x.IsActive && x.PasswordHash == passwordHash);
+
+        public async Task<Employees> FindByUsernameAsync(string username)
+            => await DbContext.Set<Employees>().FirstOrDefaultAsync(x => x.Username == username);
     }
 }
