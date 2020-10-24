@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using System.Net.Security;
 using System.Text;
 using ZFramework.Data.Abstract.ExtensionMethods;
 using ZFramework.Data.EfCore.ExtensionMethods;
@@ -53,6 +53,23 @@ namespace Demo.API
                     ValidateAudience = false
                 };
             });
+
+            services.AddAutoMapper(config =>
+            {
+                config.ForAllMaps((typeMap, config) =>
+                {
+                    config.ForAllMembers(opt =>
+                    {
+                        opt.Condition((sourceObject, destObject, sourceProperty, destProperty) =>
+                        {
+                            if (sourceProperty == null)
+                                return !(destProperty == null);
+                            return !sourceProperty.Equals(destProperty);
+                        });
+                    });
+                });
+            },
+            typeof(Startup).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
+using ZFramework.Demo.API.Models;
 using ZFramework.Demo.API.Services;
-using ZFramework.Demo.DAL.BusinessData;
 
 namespace ZFramework.Demo.API.Controllers
 {
@@ -17,11 +18,16 @@ namespace ZFramework.Demo.API.Controllers
 
 
         [HttpGet, Route(nameof(List))]
-        public ActionResult<IQueryable<Employees>> List()
+        public ActionResult<IQueryable<EmployeeListModel>> List()
         {
-            var user = User.Identity.Name;
-
             return Ok(employeeService.List());
+        }
+
+        [HttpPost, Route(nameof(Update))]
+        public async Task<IActionResult> Update(EmployeeEditModel model)
+        {
+            await employeeService.UpdateAsync(model);
+            return Ok();
         }
     }
 }
